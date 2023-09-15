@@ -7,6 +7,7 @@
 // document.querySelector(".guess").value = 12;
 // console.log(document.querySelector(".guess").value);
 const secreatNumber = Math.trunc(Math.random() * 20) + 1;
+let score = Number(document.querySelector(".score").textContent);
 
 document.querySelector(".number").textContent = secreatNumber;
 document.querySelector(".check").addEventListener("click", function () {
@@ -18,7 +19,11 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector(".message").textContent = "🎉 Correct Number !!!";
   } else if (guess < secreatNumber) {
     document.querySelector(".message").textContent = "Your Guess is Lower";
+    score--;
+    document.querySelector(".score").textContent = score;
   } else if (guess > secreatNumber) {
     document.querySelector(".message").textContent = "Your Guess is Higher";
+    score--;
+    document.querySelector(".score").textContent = score;
   }
 });
