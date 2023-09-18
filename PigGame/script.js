@@ -20,10 +20,20 @@ score1El.textContent = '0';
 diceEl.classList.add('hidden');
 
 function switchPlayer() {
-  document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove('player--active');
   activePlayer = activePlayer === 0 ? 1 : 0;
-  document.querySelector(`.player--${activePlayer}`).classList.add('player--active');
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add('player--active');
+}
 
+function playerWin() {
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add('player--winner');
+  roll.removeEventListener('click', function () {});
 }
 
 roll.addEventListener('click', function () {
@@ -57,6 +67,7 @@ hold.addEventListener('click', function () {
   if (score[activePlayer] > 100) {
     // Current Player Wins
     console.log(`Player ${activePlayer + 1} Wins`);
+    playerWin();
   } else {
     // Switch Players and change active region
     switchPlayer();
@@ -73,5 +84,6 @@ reset.addEventListener('click', function () {
   current1.textContent = currentScore;
   diceEl.classList.add('hidden');
   //Set player 1 as current
-  activePlayer = 0;
+  activePlayer = 1;
+  switchPlayer;
 });
