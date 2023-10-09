@@ -18,24 +18,38 @@
 
 // createBooking('lh123')
 // createBooking('lmao', 1, 52)
+//--------------------------------------
+// const flight = 'LAKJ35135';
+// const Viraj = {
+//   name: 'Viraj Anand',
+//   passport: 6262176200,
+// };
+// const checkin = function (flightNum, Passenger) {
+//   Passenger.name = 'Mr.' + Passenger.name;
+//   if (Passenger.passport === 6262176200) {
+//     alert('Checkin!');
+//   } else {
+//     alert('wrong Passport !');
+//   }
+// };
+// const newPassport = function (person) {
+//   person.passport = Math.trunc(Math.random() * 1000000000);
+// };
 
-const flight = 'LAKJ35135';
-const Viraj = {
-  name: 'Viraj Anand',
-  passport: 6262176200,
-};
-const checkin = function (flightNum, Passenger) {
-  Passenger.name = 'Mr.' + Passenger.name;
-  if (Passenger.passport === 6262176200) {
-    alert('Checkin!');
-  } else {
-    alert('wrong Passport !');
-  }
-};
-const newPassport = function (person) {
-  person.passport = Math.trunc(Math.random() * 1000000000);
+// checkin(flight, Viraj);
+// console.log(flight);
+// console.log(Viraj);
+
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase(); // '/{string tot replace}/g => regular expression
 };
 
-checkin(flight, Viraj);
-console.log(flight);
-console.log(Viraj);
+const upperFirstWord = function (str) {
+  const [first, ...other] = str.split(' ');
+  return [first.toUpperCase, ...other].join(' ');
+};
+
+// higher order function
+const transform = function (str, fn) {};
+
+transform('Js is the best', upperFirstWord);
