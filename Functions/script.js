@@ -40,16 +40,41 @@
 // console.log(flight);
 // console.log(Viraj);
 
-const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase(); // '/{string tot replace}/g => regular expression
-};
 
-const upperFirstWord = function (str) {
-  const [first, ...other] = str.split(' ');
-  return [first.toUpperCase, ...other].join(' ');
-};
+// ----------------------------------------------------
+// const oneWord = function (str) {
+//   return str.replace(/ /g, '').toLowerCase(); // '/{string tot replace}/g => regular expression
+// };
 
-// higher order function
-const transform = function (str, fn) {};
+// const upperFirstWord = function (str) {
+//   const [first, ...other] = str.split(' ');
+//   return [first.toUpperCase, ...other].join(' ');
+// };
 
-transform('Js is the best', upperFirstWord);
+// // higher order function
+// const transform = function (str, fn) {};
+
+// transform('Js is the best', upperFirstWord);
+
+//---------------------------------------------------
+// function returning function
+const greet = function(greeting){
+  return function(name){
+    console.log(`${greeting}, ${name}`);
+  }
+}
+
+const GreetHey = greet('Hello');// this function call will return a function which will be assigned to GreatHey
+// now we can use it as a normal function
+GreetHey('Viraj') // we get the previous input, 'hello', with help of closoures in Js
+
+// we can also chain , ie call a returning function on the function call 
+greet('Hemlo')('whayever yor name is');// this is used in functional programming
+
+// converting all to arrow function
+
+const greetArrow = greeting =>  (name) => console.log(`${greeting}, ${name}`); 
+// we dont need () i only 1 arg, and no {} , return keyword if single line.
+
+
+
