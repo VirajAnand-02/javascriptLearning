@@ -75,6 +75,7 @@ greet('Hemlo')('whayever yor name is');// this is used in functional programming
 
 const greetArrow = greeting =>  (name) => console.log(`${greeting}, ${name}`); 
 // we dont need () i only 1 arg, and no {} , return keyword if single line.
+//--------------------------------------------------------------------------------------
 
 
 
