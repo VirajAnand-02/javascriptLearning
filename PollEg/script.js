@@ -418,12 +418,7 @@ const poll = {
     // prompt numb
     const inp = Number(
       prompt(
-        'What is your favourite programming language?\n\
-    0: JavaScript\n\
-    1: Python\n\
-    2: Rust\n\
-    3: C++\n\
-    (Write option number)'
+        `${this.question}\n${this.options.join('\n')}\n(write option number)`
       )
     );
     if (inp > 3 || inp < 0 || inp == NaN) {
@@ -432,18 +427,18 @@ const poll = {
     } else {
       this.answers[inp]++;
     }
+    this.dissplayResult();
+    this.dissplayResult('string');
   },
   // display Result Method
-  dissplayResult: function (type = []) {
-    if (typeof type == String) {
-      let resString;
-      for (let i = 0; i < type.length; i++) resString += ', ' + type[i];
-      console.log(`poll results are : ${resString}`);
-    } else if (typeof type == Array) console.log(type);
+  dissplayResult: function (type = 'array') {
+    if (type == 'string') {
+      console.log(`poll results are : ${this.answers.join(', ')}`);
+    } else if (type == 'array') console.log(this.answers);
   },
 };
 
 // call methos on click
-document.querySelector('.poll').addEventListener('click', function () {
-  poll.registerNewAnswer();
-});
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
