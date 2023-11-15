@@ -108,6 +108,13 @@ const movementsUSD = movements.map(function (mov) {
 const movementsUsdArrow = movements.map(mov => mov * euroToUSD);
 // console.log(movementsUsdArrow);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
+
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -122,8 +129,15 @@ createUsernames(accounts);
 const deposits = movements.filter(function (mov) {
   return mov > 0;
 });
-console.log(movements);
-console.log(deposits);
+// console.log(movements);
+// console.log(deposits);
 
 const withdrawls = movements.filter(mov => mov < 0);
-console.log(withdrawls);
+// console.log(withdrawls);
+//
+// console.log(movements);
+const balance = movements.reduce(function (acc, curr, i, arr) {
+  // console.log(`Iteration ${i} : ${acc}`);
+  return acc + curr;
+}, 0);
+// console.log(balance);
