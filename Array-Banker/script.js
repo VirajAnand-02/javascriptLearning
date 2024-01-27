@@ -1,4 +1,5 @@
 'use strict';
+// @ts-check
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -78,7 +79,6 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 
 // Coding Challange #1
 // F
@@ -113,22 +113,20 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} EUR`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements) {
-  const income = movements
+const calcDisplaySummary = function (acc) {
+  const income = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${income}EUR`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}EUR`;
 
-  const intrest = movements
+  const intrest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposite => (deposite * 1.2) / 100)
+    .map(deposite => (deposite * acc.interestRate) / 100)
     .filter((intr, i, arr) => {
       // console.log(arr);
       return intr >= 1;
@@ -136,7 +134,6 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, intr) => acc + intr, 0);
   labelSumInterest.textContent = `${intrest}EUR`;
 };
-calcDisplaySummary(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -148,6 +145,35 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
+
+// event handlers
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault(); // prevent form from submitting
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display Welcome & UI
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    // clear input fields and unfocous from text input box
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    // display movements
+    displayMovements(currentAccount.movements);
+    // display balance
+    calcDisplayBalance(currentAccount.movements);
+    // display summary
+    calcDisplaySummary(currentAccount);
+
+    console.log('LOGIN');
+  }
+});
 
 const deposits = movements.filter(function (mov) {
   return mov > 0;
@@ -184,3 +210,19 @@ const balance = movements.reduce(function (acc, curr, i, arr) {
 // };
 
 //
+console.log('');
+// const totalDepositesUSD = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * euroToUSD)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(totalDepositesUSD);
+// console.log('');
+// const firstWithdrawl = movements.find(mov => mov < 0);
+// console.log(movements);
+// console.log(firstWithdrawl);
+
+// console.log(accounts);
+
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
+console.log('');
